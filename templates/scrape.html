@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Fmovies Checker {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    {% for k, v in cont.items %}
+      <div class="col-md-4 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2 class="panel-title">{{ v.name }}</h2>
+          </div>
+          <div class="panel-body">
+            <h4>Season: {{ v.season }}</h4>
+            <h4>Last episode: {{ v.episode_num }}</h4>
+            <h4>Link: <a href="{{ v.episode_link }}">{{ v.episode_link }}</a></h4>
+          </div>
+        </div><!-- /panel -->
+      </div>
+    {% endfor %}
+  </div> <!-- /row -->
+</div> <!-- /container-fluid -->
+{% endblock %}

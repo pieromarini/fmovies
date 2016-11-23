@@ -1,0 +1,120 @@
+/*==============================================================================
+*                           DASHBY CUSTOM STYLINGS
+*                              USING BOOTSTRAP
+* ============================================================================*/
+
+/* Navbar brand centering  */
+.navbar-brand{
+  font-size: 45px;
+  float: none;
+}
+.navbar-center{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+}
+.navbar-center a{
+  position: relative;
+  color: #FFF;
+  z-index: 21;
+}
+.navbar-form{
+  position: relative;
+  z-index: -1;
+}
+.navbar-center a:hover{
+  color: #A9A9A9;
+  text-decoration: none;
+}
+.navbar-inverse .navbar-collapse{
+  position: relative;
+  z-index: 20;
+}
+.navbar-inverse .navbar-brand{
+  color: #FFF;
+}
+.navbar-inverse .navbar-brand:hover{
+  color: #A9A9A9;
+}
+
+.navbar-left{
+  margin-left: 80px;
+}
+.navbar-right{
+  margin-right: 120px;
+}
+.navbar-right li,
+.navbar-left li{
+  font-size: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Pointer for a with button type */
+.button-pointer{
+  cursor: pointer;
+}
+
+/* Modal paragraph */
+.modal-content p{
+  margin: 10px 0 10px 10px;
+}
+
+/* Panel */
+.panel-title{
+  padding-top: 7.5px;
+  font-size: 20px;
+}
+
+/* Fixed height panel  */
+.panel{
+  min-height: 235px;
+}
+
+/* Modal Adjustments */
+.modal-title{
+  text-align: center;
+  color: #000000;
+  font-size: 25px;
+}
+
+.modal-body p{
+  color: #000000;
+  font-size: 20px;
+}
+
+/* Flex fix for grid height */
+.row{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
+}
+.row > [class*='col-']{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search Box  */
+#search-series{
+  width: 200px;
+}
+#search-series-clean{
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  height: 14px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+
+

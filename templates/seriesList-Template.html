@@ -1,0 +1,82 @@
+<div class="container-fluid" id="series-data">
+  <div class="row">
+    {% for c in cont %}
+      <div class="col-md-4 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading clearfix">
+            <h2 class="panel-title pull-left">{{ c.name.capitalize }}</h2>
+            <div class="panel-buttons pull-right">
+              <button type="button" class="btn btn-default" aria-label="Right Align"
+                      data-toggle="modal" data-target="#serie-Refresh{{ c.id }}">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+              </button>
+              <button type="button" class="btn btn-default" aria-label="Right Align"
+                      data-toggle="modal" data-target="#serie-Delete{{ c.id }}">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+
+              <!-- Refresh Serie Modal -->
+              <div class="modal fade" role="dialog" id="serie-Refresh{{ c.id }}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Confirm Update</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Update {{ c.name }}?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{% url 'scraper:update_series' c.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="serie_id" value="{{ c.id }}" />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-default" 
+                                data-dismiss="modal">Cancel
+                        </button>
+                      </form>
+                    </div>
+                  </div><!-- /Modal Content  -->
+                </div>
+              </div>
+              <!-- /Refresh Serie Modal  -->
+
+              <!-- Delete Serie Modal -->
+              <div class="modal fade" role="dialog" id="serie-Delete{{ c.id }}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="color: #000000;">Confirm Delete</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p style="font-size: 20px; color: #000000;">Are you sure you want to delete {{ c.name }}?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{% url 'scraper:remove_series' c.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="serie_id" value="{{ c.id }}" />
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                        <button type="button" class="btn btn-default" 
+                                data-dismiss="modal">Cancel
+                        </button>
+                      </form>
+                    </div>
+                  </div><!-- /Modal Content  -->
+                </div>
+              </div>
+              <!-- /Delete Modal  -->
+
+            </div><!-- /Panel Buttons -->
+          </div><!--/Panel-Heading -->
+          <div class="panel-body">
+            <h4>Season: {{ c.season }}</h4>
+            <h4>Last episode: {{ c.episode_num }}</h4>
+            <h4>Link: <a href="{{ c.episode_link }}" target="_blank">{{ c.episode_link }}</a></h4>
+            <h4>Last Updated: {{ c.last_updated }}</h4>
+          </div>
+        </div><!-- /panel -->
+      </div>
+    {% endfor %}
+  </div> <!-- /row -->
+</div> <!-- /container-fluid -->

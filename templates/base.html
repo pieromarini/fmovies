@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equi="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+  <meta name="description" content="">
+  <title>{% block title %} {% endblock %}</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css'  %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/pi.css' %}" type="text/css" />
+</head>
+<body>
+  <!-- Navigation Bar  -->
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <span class="sr-only"> Toggle Navigation </span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div> <!-- /navbar-header  -->
+        
+        <div id ="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <!-- Add this link to the actual "tracker" page. -->
+            <li><a href="{% url 'scraper:add_series' %}">Add Series</a></li>
+            <li><!-- Confirmation Modal for scraping --> 
+                <!-- Add this button somewhere else. --> 
+              <a class="button-pointer" type="button" data-toggle="modal" data-target="#RefreshAllModal">
+                Refresh All
+              </a>  
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'scraper:index' %}">Home</a></li>
+            <li><a href="{% url 'scraper:tracker'%}">Tracker</a></li>
+            <li><a href="{% url 'scraper:latest_movies' %}">Latest Movies</a></li>
+          </ul>
+          <!-- Only display search box if in /tracker  -->
+          {% url 'scraper:tracker' as tracker_url %}
+          {% if request.get_full_path == tracker_url %}
+          <!-- Search Box -->
+          <div class="navbar-form navbar-center">
+            <div class="form-group" style="display: inline;">
+              {% csrf_token %}
+              <div class="btn-group">
+                <input type="search" id="search-series"  class="form-control" placeholder="Search series">
+                <span id="search-series-clean" style="color: red;" class="glyphicon glyphicon-remove-circle"></span>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!-- /End Searchbox  -->
+        </div> <!-- /navbar  --> 
+      </div> <!-- /container-fluid  -->
+    </nav>
+  </div> <!-- /navbar-wrapper  -->
+  <!--Modal -->
+  <div class="modal fade" id="RefreshAllModal" tabindex="-1" role="dialog"
+    aria-labelledby="ScrapeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="ScrapeModalLabel">
+            Refresh All Confirmation
+          </h4>
+        </div>
+        <div class"modal-body">
+          <p style="font-size: 20px;">Refresh all tracked series?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a type="button" class="btn btn-primary" href="{% url 'scraper:scrape' %}">Confirm</a>
+        </div>
+      </div>
+    </div>  
+  </div><!-- /Modal -->
+  {% block body %}
+  {% endblock %}
+  <script src="{% static 'js/vendor/jquery-3.1.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
