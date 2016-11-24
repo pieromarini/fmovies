@@ -14,4 +14,4 @@
 - Django 1.10 + Sqlite
 
 #### More images:
-  ![Imgur Link](http://imgur.com/a/kMAfE)
+  [Imgur Link](http://imgur.com/a/kMAfE)
